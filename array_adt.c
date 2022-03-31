@@ -52,6 +52,65 @@ int binarySearch(struct Array arr, int key)
     return -1;
 }
 
+
+// Get operation
+int Get(struct Array array, int index)
+{
+    if (index > 0 && index < array.length) {
+        return array.A[index];
+    }
+    return - 1;
+}
+
+
+// Set operation
+void Set(struct Array* array, int index, int value)
+{
+    if (index > 0 && index < array->length) {
+        array->A[index] = value;
+    }
+}
+
+int Max(struct Array array)
+{
+    if (array.length == 0) { return - 1; }
+
+    int max = array.A[0];
+    for (int i = 0; i < array.length; i++) {
+        if (array.A[i] > max) {
+            max = array.A[i];
+        }
+    }
+    return max;
+}
+
+int Min(struct Array array)
+{
+    if (array.length == 0) { return -1; }
+
+    int min = array.A[0];
+    for (int i = 0; i < array.length; i++) {
+        if (array.A[i] < min) {
+            min = array.A[i];
+        }
+    }
+    return min;
+}
+
+int Sum(struct Array array)
+{
+    int sum = 0;
+    for (int index = 0; index < array.length; index++) {
+        sum = sum + array.A[index];
+    }
+    return sum;
+}
+
+float Avg(struct Array array)
+{
+    return (float) (Sum(array) / array.length);
+}
+
 int main(void)
 {
     struct Array array;
