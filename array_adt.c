@@ -121,24 +121,59 @@ void Reverse(struct Array* array)
     }
 }
 
+void insertSort(struct Array* array, int x)
+{
+    int i = array->length - 1;
+    if (array->size == array->length) { return; }
+    while (i>= 0 && array->A[i] > x)
+    {
+        array->A[i+1] = array->A[i];
+        i--;
+    }
+    array->A[i+1] = x;
+    array->length++;
+}
+
+int isSorted(struct Array array)
+{
+    int i;
+    for (i = 0; i < array.length - 1; i++)
+    {
+        if (array.A[i] > array.A[i+1]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Merge two sorted array
+struct Array* Merge(struct Array* a, struct Array* b)
+{
+    int i, j, k;
+    i = j = k;
+    struct Array* arr3 = (struct Array*)(malloc(sizeof(struct Array)));
+
+    while (i < a->length && j < b->length) {
+        if (a->A[i] > b->A[j]) {
+            arr3->A[k++] = a->A[i++];
+        }
+        else {
+            arr3->A[k++] = b->A[j++];
+        }
+    }
+
+    while (i < a->length) {
+        arr3->A[k++] = a->A[i++];
+    }
+    while (j < b->length) {
+        arr3->A[k++] = b->A[j++];
+    }
+    arr3->length = a->length + b->length;
+    arr3->size = 10;
+    return arr3;
+}
 
 int main(void)
 {
-    struct Array array;
-    int n, i;
-    printf("Enter the size of an array: ");
-    scanf("%d", &array.size);
-    array.A = (int *) (malloc(array.size * sizeof(int)));
-    array.length = 0;
-
-    printf("Enter number of numbers: ");
-    scanf("%d", &n);
-
-    printf("Enter all elements \n");
-    for (i = 0; i < n; i++) {
-        scanf("%d", &array.A[i]);
-    }
-    array.length = n;
-    Display(array);
     return 0;
 }
