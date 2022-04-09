@@ -48,6 +48,9 @@ int sumRecursive(struct Node*);
 int Max(struct Node*);
 int MaxRecursive(struct Node*);
 
+struct Node* search(struct Node*, int target);
+struct Node*  searchRecursive(struct Node*, int target);
+
 // Implementations
 void display(struct Node* node)
 {
@@ -128,6 +131,30 @@ int MaxRecursive(struct Node* node)
 }
 
 
+struct Node* search(struct Node* node, int target)
+{
+    while (node) {
+        if (node->data == target) {
+            return node;
+        }
+        node = node -> next;
+    }
+    return NULL;
+}
+
+
+struct Node* searchRecursive(struct Node* node, int target)
+{
+    if (node) {
+        if (node->data == target) {
+            return node;
+        }
+        return searchRecursive(node->next, target);
+    }
+    return NULL;
+}
+
+
 int main(void)
 {
     int A[] = {1, 2, 400, 4, 5};
@@ -135,6 +162,8 @@ int main(void)
     display(first);
 
     int max = MaxRecursive(first);
-    printf("Max elements is %d", max);
+    printf("Max elements is %d \n", max);
+
+
     return 0;
 }
