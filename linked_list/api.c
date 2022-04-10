@@ -154,6 +154,50 @@ struct Node* searchRecursive(struct Node* node, int target)
     return NULL;
 }
 
+void insert(struct Node* p, int index, int value)
+{
+    int i;
+    if (index < 0 || index > countNodes(p)) { return; }
+    struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+    t->data = value;
+
+    if (index == 0) {
+        t->next = first;
+        first = t;
+    }
+    for (i = 0; i < index - 1; i++) {
+        p = p->next;
+    }
+    t->next = p->next;
+    p->next = t;
+
+}
+
+void insertSorted(struct Node* p, int x)
+{
+    struct Node *t, *q = NULL;
+    t = (struct Node*)malloc(sizeof(struct Node));
+    t->next = NULL;
+    t->data = x;
+
+    if (first == NULL) {
+        first = t;
+    }
+    else {
+        while (p && p->data < x) {
+            q = p;
+            p = p->next;
+        }
+        if (p == first) {
+            t->next = first;
+            first = t;
+        }
+        else {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
 
 int main(void)
 {
@@ -163,6 +207,9 @@ int main(void)
 
     int max = MaxRecursive(first);
     printf("Max elements is %d \n", max);
+
+    insert(first, 5, 100);
+    display(first);
 
 
     return 0;
