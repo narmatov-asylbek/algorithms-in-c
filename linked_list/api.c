@@ -51,6 +51,12 @@ int MaxRecursive(struct Node*);
 struct Node* search(struct Node*, int target);
 struct Node*  searchRecursive(struct Node*, int target);
 
+void insertSorted(struct Node* p, int x);
+void insert(struct Node* p, int index, int value);
+
+int Delete(struct Node* p, int pos);
+
+
 // Implementations
 void display(struct Node* node)
 {
@@ -199,6 +205,33 @@ void insertSorted(struct Node* p, int x)
     }
 }
 
+int Delete(struct Node* p, int pos)
+{
+    struct Node* q;
+    int x = -1, i;
+
+    if (pos < 1 || pos > countNodes(p)) {
+        return - 1;
+    }
+    if (pos == 1) {
+        q = first;
+        x=first->data;
+        first = first->next;
+        free(q);
+        return x;
+    }
+    else {
+        for (i = 0; i < pos; i++) {
+            q=p;
+            p = p->next;
+        }
+        q->next = p->next;
+        x = p->data;
+        free(p);
+        return x;
+    }
+}
+
 int main(void)
 {
     int A[] = {1, 2, 400, 4, 5};
@@ -211,6 +244,7 @@ int main(void)
     insert(first, 5, 100);
     display(first);
 
-
+    int result = Delete(first, 4);
+    printf("Deleted node value is %d \n", result);
     return 0;
 }
