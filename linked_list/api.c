@@ -56,6 +56,8 @@ void insert(struct Node* p, int index, int value);
 
 int Delete(struct Node* p, int pos);
 
+int IsSorted(struct Node* p);
+
 
 // Implementations
 void display(struct Node* node)
@@ -230,6 +232,19 @@ int Delete(struct Node* p, int pos)
         free(p);
         return x;
     }
+}
+
+int IsSorted(struct Node* p)
+{
+    int x = INT32_MIN;
+    while (p) {
+        if (p->data < x) {
+            return 0;
+        }
+        x = p->data;
+        p = p->next;
+    }
+    return 1;
 }
 
 int main(void)
