@@ -7,7 +7,7 @@
 struct Node {
     int data;
     struct Node* next;
-} *first=NULL;
+} *first=NULL, *second=NULL;
 
 
 // Helper Functions
@@ -309,6 +309,47 @@ void ReverseRecursive(struct Node *q, struct Node *p) {
         first = q;
     }
 }
+
+void Concatenate(struct Node *q, struct Node *p) {
+    if (q == NULL) { return; }
+    while (q->next != NULL) {
+        q = q->next;
+    }
+    q->next = p;
+}
+
+void MergeSortedList(struct Node* p, struct Node* q)
+{
+    struct Node *last;
+    if (p->data < q->data) {
+        second=last=p;
+        p = p->next;
+        second->next=NULL;
+    }
+    else {
+        second=last=q;
+        q = q->next;
+        second->next=NULL;
+    }
+
+    while (p && q) {
+        if (p->data < q->data) {
+            last->next=p;
+            last = p;
+            p = p->next;
+            last -> next = NULL;
+        }
+        else {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p) { last->next = p; }
+    if (q) { last->next = q; }
+}
+
 
 int main(void)
 {
