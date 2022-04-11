@@ -58,6 +58,8 @@ int Delete(struct Node* p, int pos);
 
 int IsSorted(struct Node* p);
 
+void RemoveDuplicate(struct Node* p);
+
 
 // Implementations
 void display(struct Node* node)
@@ -245,6 +247,67 @@ int IsSorted(struct Node* p)
         p = p->next;
     }
     return 1;
+}
+
+void RemoveDuplicate(struct Node* p)
+{
+    if (!p || !p->next) { return; }
+    struct Node* q = p->next;
+    while (q) {
+        if (q->data != p->data) {
+            q = p;
+            q = q->next;
+        }
+        else {
+            q->next = p->next;
+            free(p);
+            p = q->next;
+            q = q->next;
+        }
+    }
+}
+
+// Reversing linked list
+void ReverseUsingAdditionalSpace(struct Node* p)
+{
+    int *A, i = 0;
+    struct Node* q;
+    A = (int *)malloc(sizeof(int) * countNodes(p));
+
+    while (q) {
+        A[i] = q->data;
+        q=q->next;
+        i++;
+    }
+    q=p;
+    i--;
+    while (q) {
+        q->data = A[i];
+        q = q->next;
+        i--;
+    }
+}
+
+void ReverseUsingSlidingPointer(struct Node* p)
+{
+    struct Node *q=NULL, *r=NULL;
+    while (p) {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+void ReverseRecursive(struct Node *q, struct Node *p) {
+    if (p) {
+        ReverseRecursive(p, p->next);
+        p->next = q;
+    }
+    else {
+        first = q;
+    }
 }
 
 int main(void)
