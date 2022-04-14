@@ -350,6 +350,21 @@ void MergeSortedList(struct Node* p, struct Node* q)
     if (q) { last->next = q; }
 }
 
+int hasLoop(struct Node *p)
+{
+    struct Node *q, *t;
+    t = q = p;
+    while (p) {
+        t = t->next;
+        q = q->next->next;
+
+        if (t == q) {
+            return 1;
+        }
+    }
+    return -1;
+}
+
 
 int main(void)
 {
