@@ -365,6 +365,21 @@ int hasLoop(struct Node *p)
     return -1;
 }
 
+int findMiddle(struct Node *p)
+{
+    struct Node *q, *t;
+    q = t = p;
+
+    while (q) {
+        q = q->next;
+        if (q) { q = q->next; }
+        if (q) {t = t->next ;}
+    }
+    return t->data;
+
+}
+
+
 
 int main(void)
 {
