@@ -42,6 +42,33 @@ void printTree(treeNode *root, int level) {
 
 }
 
+int count(treeNode *p)
+{
+    int x, y;
+    if (p != NULL) {
+        x = count(p->left);
+        y = count(p->right);
+        return x + y + 1;
+    }
+    return 0;
+}
+
+int height(treeNode *p)
+{
+    int x = 0, y = 0;
+    if (!p) {
+        return 0;
+    }
+    x = height(p->left);
+    y = height(p->right);
+    if (x > y) {
+        return x + 1;
+    }
+    else {
+        return y + 1;
+    }
+}
+
 int main(void)
 {
     treeNode *n1 = createNode(1);
