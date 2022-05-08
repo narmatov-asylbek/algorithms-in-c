@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sorting_algos/common.h"
+#include "common.h"
 
 #define PQ_SIZE 100
 
