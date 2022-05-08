@@ -16,4 +16,10 @@ void display(int A[], int size) {
     }
     printf("\n");
 }
+
+int intCompare(int *first, int *second) {
+    if (*first > *second) { return 1; }
+    if (*first < *second) { return -1; }
+    return 0;
+}
 #endif
