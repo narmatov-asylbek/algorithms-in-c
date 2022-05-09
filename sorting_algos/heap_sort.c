@@ -86,14 +86,14 @@ void heap_sort(int s[], int n) {
     int i;
     priority_queue q;
     make_heap(&q, s, n);
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n - 1; i++) {
         s[i] = extract_min(&q);
     }
 }
 
 int main(void) {
     int A[] = {20, 13, 23, 11, 99, 3, 7, 1, 34, 48};
-    heap_sort(A, 10);
+    heap_sort(A, 9);
     display(A, 9);
     return 0;
 }
